@@ -1,7 +1,7 @@
 'use client'
 import { FormEvent } from 'react'
 import { useRegisterOwner } from './api/query'
-import styles from './register-form.module.css'
+import styles from './register-owner-form.module.css'
 import { InputField } from '@/shared/ui/input-field/input-field'
 import { CustomButton } from '@/shared/ui/button/custom-button'
 
@@ -13,7 +13,7 @@ type User = {
   lastName: string
 }
 
-export function RegisterForm() {
+export function RegisterOwnerForm() {
   const { registerOwner } = useRegisterOwner()
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -25,7 +25,7 @@ export function RegisterForm() {
     <div className={styles.container}>
       <form onSubmit={onSubmit}>
         <div className={styles.header}>
-          <h3>Register</h3>
+          <h3>Register as Owner</h3>
           <p>Welcome &#x1F44B;</p>
         </div>
         <InputField name='email' type='email' label='Email' required />
@@ -33,7 +33,6 @@ export function RegisterForm() {
         <InputField name='username' type='text' label='Username' required />
         <InputField name='firstName' type='text' label='First Name' required />
         <InputField name='lastName' type='text' label='Last Name' required />
-
         <div>
           <CustomButton type='submit' fullwidth>
             Continue
