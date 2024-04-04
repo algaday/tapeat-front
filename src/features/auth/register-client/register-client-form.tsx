@@ -1,34 +1,62 @@
 'use client'
-import { FormEvent } from 'react'
-import { useRegisterClient } from './api/query'
-import styles from './register-client-form.module.css'
-import { InputField } from '@/shared/ui/input-field/input-field'
-import { CustomButton } from '@/shared/ui/button/custom-button'
-import { Client } from './api/query.type'
+import { Button, TextField, Typography } from '@mui/material'
+import { FormWrapper } from './register-client-form.styles'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRegisterCustomerMutation } from '@/entities/user/api/userApi'
+
+type Inputs = {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+}
 
 export function RegisterClientForm() {
-  const { registerClient } = useRegisterClient()
+  const [registerUser, { isLoading }] = useRegisterCustomerMutation()
+  const { register, handleSubmit, reset } = useForm<Inputs>()
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const dataInfo = Object.fromEntries(formData.entries())
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const info = await registerUser(data)
+    reset()
   }
   return (
-    <div className={styles.container}>
-      <form onSubmit={onSubmit}>
-        <div className={styles.header}>
-          <h3>Register as Client</h3>
-          <p>Welcome &#x1F44B;</p>
-        </div>
-        <InputField name='name' type='text' label='Name' required />
-        <InputField name='phone' type='tel' label='Phone number' required />
-        <div>
-          <CustomButton type='submit' fullwidth>
-            Continue
-          </CustomButton>
-        </div>
-      </form>
-    </div>
+    <FormWrapper autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant='h6' component='h2'>
+        Register as Customer
+      </Typography>
+      <TextField
+        {...register('email')}
+        type='email'
+        required
+        id='email'
+        label='Email'
+        margin='normal'
+      />
+      <TextField
+        {...register('password')}
+        type='password'
+        required
+        id='password'
+        label='Password'
+        margin='normal'
+      />
+      <TextField
+        {...register('firstName')}
+        required
+        id='firstName'
+        label='First Name'
+        margin='normal'
+      />
+      <TextField
+        {...register('lastName')}
+        required
+        id='lastName'
+        label='Last Name'
+        margin='normal'
+      />
+      <Button variant='contained' type='submit' disabled={isLoading}>
+        Continue
+      </Button>
+    </FormWrapper>
   )
 }

@@ -1,44 +1,61 @@
 'use client'
-import { FormEvent } from 'react'
-import { useRegisterOwner } from './api/query'
-import styles from './register-owner-form.module.css'
-import { InputField } from '@/shared/ui/input-field/input-field'
-import { CustomButton } from '@/shared/ui/button/custom-button'
+import { Button, TextField, Typography } from '@mui/material'
+import { FormWrapper } from './register-owner-form.styles'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRegisterOwnerMutation } from '@/entities/user/api/userApi'
 
-type User = {
+type Inputs = {
   email: string
   password: string
-  username: string
   firstName: string
   lastName: string
 }
 
 export function RegisterOwnerForm() {
-  const { registerOwner } = useRegisterOwner()
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    const dataInfo = Object.fromEntries(formData.entries()) as User
-    const resp = registerOwner(dataInfo)
+  const { register, handleSubmit, reset } = useForm<Inputs>()
+  const [registerOwner] = useRegisterOwnerMutation()
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    registerOwner(data)
+    reset()
   }
   return (
-    <div className={styles.container}>
-      <form onSubmit={onSubmit}>
-        <div className={styles.header}>
-          <h3>Register as Owner</h3>
-          <p>Welcome &#x1F44B;</p>
-        </div>
-        <InputField name='email' type='email' label='Email' required />
-        <InputField name='password' type='password' label='Password' required />
-        <InputField name='username' type='text' label='Username' required />
-        <InputField name='firstName' type='text' label='First Name' required />
-        <InputField name='lastName' type='text' label='Last Name' required />
-        <div>
-          <CustomButton type='submit' fullwidth>
-            Continue
-          </CustomButton>
-        </div>
-      </form>
-    </div>
+    <FormWrapper autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant='h6' component='h2'>
+        Register as Restaurant Owner
+      </Typography>
+      <TextField
+        {...register('email')}
+        type='email'
+        required
+        id='email'
+        label='Email'
+        margin='normal'
+      />
+      <TextField
+        {...register('password')}
+        type='password'
+        required
+        id='password'
+        label='Password'
+        margin='normal'
+      />
+      <TextField
+        {...register('firstName')}
+        required
+        id='firstName'
+        label='First Name'
+        margin='normal'
+      />
+      <TextField
+        {...register('lastName')}
+        required
+        id='lastName'
+        label='Last Name'
+        margin='normal'
+      />
+      <Button variant='contained' type='submit'>
+        Continue
+      </Button>
+    </FormWrapper>
   )
 }

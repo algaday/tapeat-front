@@ -1,9 +1,11 @@
+'use client'
+
 import { LoginForm } from '@/features/auth/login/login-form'
-import styles from './login-page.module.css'
+import { Wrapper } from './login-page.styles'
 export function LoginPage() {
   return (
-    <main className={styles.container}>
+    <Wrapper>
       <LoginForm />
-    </main>
+    </Wrapper>
   )
 }

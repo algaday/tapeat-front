@@ -6,6 +6,7 @@ type Props = {
   name?: HTMLInputTypeAttribute
   label?: string
   required?: boolean
+  placeholder?: HTMLInputTypeAttribute
 }
 
 export function InputField(props: Props) {

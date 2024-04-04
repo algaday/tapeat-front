@@ -1,22 +1,49 @@
-import { InputField } from '@/shared/ui/input-field/input-field'
-import styles from './login-form.module.css'
-import { CustomButton } from '@/shared/ui/button/custom-button'
+'use client'
+import { Button, TextField, Typography } from '@mui/material'
+import { FormWrapper } from './login-form.styles'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useLoginMutation } from '@/entities/user/api/userApi'
+import { useRouter } from 'next/navigation'
+
+type Inputs = {
+  email: string
+  password: string
+}
+
 export function LoginForm() {
+  const { register, handleSubmit, reset } = useForm<Inputs>()
+  const [login] = useLoginMutation()
+  const router = useRouter()
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await login(data)
+    reset()
+    router.refresh()
+  }
   return (
-    <div className={styles.container}>
-      <form>
-        <div>
-          <h3>Sign-in</h3>
-          <p>Welcome &#x1F44B;</p>
-        </div>
-        <InputField name='email' type='email' label='Email' required />
-        <InputField name='password' type='password' label='Password' required />
-        <div>
-          <CustomButton type='submit' fullwidth>
-            Continue
-          </CustomButton>
-        </div>
-      </form>
-    </div>
+    <FormWrapper autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant='h6' component='h2'>
+        Login
+      </Typography>
+      <TextField
+        {...register('email')}
+        type='email'
+        required
+        id='email'
+        label='Email'
+        margin='normal'
+      />
+      <TextField
+        {...register('password')}
+        type='password'
+        required
+        id='password'
+        label='Password'
+        margin='normal'
+      />
+
+      <Button variant='contained' type='submit'>
+        Continue
+      </Button>
+    </FormWrapper>
   )
 }

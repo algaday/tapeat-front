@@ -1,4 +1,8 @@
-.container {
+import styled from 'styled-components'
+
+export const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
   margin: 0px auto;
   width: 100%;
   max-width: 448px;
@@ -7,11 +11,4 @@
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
     rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
   padding: 50px;
-}
-.header {
-  margin-bottom: 5px;
-}
-
-.header > h3 {
-  margin-bottom: 15px;
-}
+`
