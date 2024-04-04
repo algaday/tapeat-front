@@ -19,12 +19,17 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser: (state) => {
+      state.user = null
+    },
+  },
   extraReducers: (builder) => {
     builder.addMatcher(
       userApi.endpoints.login.matchFulfilled,
       (state, action: PayloadAction<User>) => {
         // Update state with the response data
+
         state.user = action.payload
       }
     )
@@ -32,6 +37,6 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {} = userSlice.actions
+export const { clearUser } = userSlice.actions
 
 export default userSlice.reducer

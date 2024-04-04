@@ -16,8 +16,9 @@ export function LoginForm() {
   const router = useRouter()
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await login(data)
+
     reset()
-    router.refresh()
+    // router.refresh()
   }
   return (
     <FormWrapper autoComplete='off' onSubmit={handleSubmit(onSubmit)}>

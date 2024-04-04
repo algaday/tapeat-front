@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ReactQueryProvider from '@/shared/api/react-query-provider'
 import { Navbar } from '@/shared/ui/navbar/navbar'
+import dynamic from 'next/dynamic'
+import CutomThemeProvider from '@/shared/api/custom-theme-provider'
+
+const ReduxProvider = dynamic(() => import('@/shared/api/reduxProvider'), {
+  ssr: false,
+})
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +25,10 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <Navbar />
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+
+        <ReduxProvider>
+          <CutomThemeProvider>{children}</CutomThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   )
