@@ -2,7 +2,7 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { FormWrapper } from './register-owner-form.styles'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useRegisterOwnerMutation } from '@/entities/user/api/userApi'
+import { useRegisterOwnerMutation } from '@/shared/api/user/userApi'
 
 type Inputs = {
   email: string

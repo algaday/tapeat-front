@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { userApi } from '../api/userApi'
+import { userApi } from '../../../shared/api/user/userApi'
 
 export interface User {
   id: string
@@ -28,8 +28,6 @@ export const userSlice = createSlice({
     builder.addMatcher(
       userApi.endpoints.login.matchFulfilled,
       (state, action: PayloadAction<User>) => {
-        // Update state with the response data
-
         state.user = action.payload
       }
     )
