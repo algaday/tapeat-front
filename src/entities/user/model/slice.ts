@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { userApi } from '../../../shared/api/user/userApi'
+import { userApi } from '../api/userApi'
 
 export interface User {
   id: string
@@ -25,12 +25,19 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      userApi.endpoints.login.matchFulfilled,
-      (state, action: PayloadAction<User>) => {
-        state.user = action.payload
-      }
-    )
+    builder
+      .addMatcher(
+        userApi.endpoints.login.matchFulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.user = action.payload
+        }
+      )
+      .addMatcher(
+        userApi.endpoints.registerOwner.matchFulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.user = action.payload
+        }
+      )
   },
 })
 

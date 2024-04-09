@@ -10,5 +10,11 @@ export const FormWrapper = styled.form`
   border-radius: 4px;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
     rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
-  padding: 50px;
+  padding: 30px 50px;
+
+  .footer {
+    display: flex;
+    margin-top: 16px;
+    gap: 10px;
+  }
 `

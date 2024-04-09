@@ -2,16 +2,14 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { FormWrapper } from './login-form.styles'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
-import { useLoginMutation } from '@/shared/api/user/userApi'
+import { useLoginMutation } from '@/entities/user/api/userApi'
 import { useRouter } from 'next/navigation'
 import { LoginFormSchema, loginFormShema } from '../model/loginFormSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RHFInputField } from '@/shared/ui/rhf-input-field'
+import Link from 'next/link'
 
 export function LoginForm() {
-  // const { register, handleSubmit, reset } = useForm<LoginFormSchema>({
-  // resolver: zodResolver(loginFormShema),
-  // })
   const methods = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormShema),
   })
@@ -42,6 +40,12 @@ export function LoginForm() {
         <Button variant='contained' type='submit'>
           Continue
         </Button>
+        <div className='footer'>
+          <Typography variant='subtitle2'>Do not have an account?</Typography>
+          <Link href='/register-owner'>
+            <Typography variant='subtitle2'>Register</Typography>
+          </Link>
+        </div>
       </FormWrapper>
     </FormProvider>
   )

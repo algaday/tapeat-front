@@ -5,7 +5,7 @@ export const loginFormShema = z.object({
     .string()
     .min(1, { message: 'Email is required' })
     .email({ message: 'Must be a valid email' }),
-  password: z.string().min(3, { message: 'Must be at least 3 characters' }),
+  password: z.string().min(6, { message: 'Must be at least 6 characters' }),
 })
 
 export type LoginFormSchema = z.infer<typeof loginFormShema>

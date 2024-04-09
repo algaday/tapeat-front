@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Wrapper } from './side-navigation.styles'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store/hooks'
-import { useLogoutMutation } from '@/shared/api/user/userApi'
+import { useLogoutMutation } from '@/entities/user/api/userApi'
 import { useRouter } from 'next/navigation'
 import { clearUser } from '@/entities/user/model/slice'
 export function SideNavigation() {

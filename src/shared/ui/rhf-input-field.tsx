@@ -12,8 +12,6 @@ export function RHFInputField(props: Props) {
     formState: { errors },
   } = useFormContext()
 
-  console.log(errors)
-
   return (
     <TextField
       {...props}
