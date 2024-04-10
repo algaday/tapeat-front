@@ -1,10 +1,10 @@
 'use client'
-import { Button, TextField, Typography } from '@mui/material'
-import { FormWrapper } from './login-form.styles'
+import { Button, Typography } from '@mui/material'
+import { Wrapper } from './login-form.styles'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
-import { useLoginMutation } from '@/entities/user/api/userApi'
+import { useLoginMutation } from '@/entities/user/api/user-api'
 import { useRouter } from 'next/navigation'
-import { LoginFormSchema, loginFormShema } from '../model/loginFormSchema'
+import { LoginFormSchema, loginFormShema } from '../model/login-form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RHFInputField } from '@/shared/ui/rhf-input-field'
 import Link from 'next/link'
@@ -24,7 +24,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...methods}>
-      <FormWrapper autoComplete='off' onSubmit={methods.handleSubmit(onSubmit)}>
+      <Wrapper autoComplete='off' onSubmit={methods.handleSubmit(onSubmit)}>
         <Typography variant='h6' component='h2'>
           Login
         </Typography>
@@ -46,7 +46,7 @@ export function LoginForm() {
             <Typography variant='subtitle2'>Register</Typography>
           </Link>
         </div>
-      </FormWrapper>
+      </Wrapper>
     </FormProvider>
   )
 }

@@ -2,11 +2,11 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { FormWrapper } from './register-owner-form.styles'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
-import { useRegisterOwnerMutation } from '@/entities/user/api/userApi'
+import { useRegisterOwnerMutation } from '@/entities/user/api/user-api'
 import {
   RegisterFormSchema,
   registerFormSchema,
-} from '../model/registerFormSchema'
+} from '../model/register-form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RHFInputField } from '@/shared/ui/rhf-input-field'
 import { useRouter } from 'next/navigation'

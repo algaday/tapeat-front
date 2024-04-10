@@ -5,10 +5,10 @@ import {
   Drawer,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
   Typography,
 } from '@mui/material'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Wrapper } from './side-navigation.styles'
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store/hooks'
-import { useLogoutMutation } from '@/entities/user/api/userApi'
+import { useLogoutMutation } from '@/entities/user/api/user-api'
 import { useRouter } from 'next/navigation'
 import { clearUser } from '@/entities/user/model/slice'
 export function SideNavigation() {
@@ -38,24 +38,28 @@ export function SideNavigation() {
     <Wrapper>
       <Drawer
         sx={{
-          width: 240,
+          maxWidth: 240,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: 240,
+            maxWidth: 240,
             boxSizing: 'border-box',
           },
         }}
         variant='permanent'
         anchor='left'
       >
-        <div className='avatar-container'>
-          <Avatar />
-          <Typography variant='h6' component='h2'>
-            {user?.firstName}
-          </Typography>
-        </div>
         <Divider />
         <List>
+          <ListItem key='avatar' disablePadding>
+            <ListItemButton>
+              <ListItemAvatar>
+                <Avatar />
+              </ListItemAvatar>
+              <ListItemText primary={user?.firstName} />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
