@@ -3,7 +3,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import theme from './theme'
 
-const CutomThemeProvider = ({ children }: { children: React.ReactNode }) => {
+const CustomThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -12,4 +12,4 @@ const CutomThemeProvider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default CutomThemeProvider
+export default CustomThemeProvider

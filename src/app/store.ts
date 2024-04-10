@@ -12,6 +12,7 @@ import {
 } from 'redux-persist'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import { baseApi } from '../shared/api'
+import { rtkQueryErrorLogger } from '@/shared/api/error-logger.middleware'
 
 const createNoopStorage = () => {
   return {
@@ -51,7 +52,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(baseApi.middleware),
+    }).concat(baseApi.middleware, rtkQueryErrorLogger),
 })
 
 export type RootState = ReturnType<typeof store.getState>

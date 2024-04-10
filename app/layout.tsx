@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
-import CutomThemeProvider from '@/app/providers/custom-theme-provider'
+import CustomThemeProvider from '@/app/providers/custom-theme-provider'
+import ToastProvider from '@/app/providers/toast-provider'
 
-const ReduxProvider = dynamic(() => import('@/app/providers/reduxProvider'), {
+const ReduxProvider = dynamic(() => import('@/app/providers/redux-provider'), {
   ssr: false,
 })
 
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <ReduxProvider>
-          <CutomThemeProvider>{children}</CutomThemeProvider>
+          <CustomThemeProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </CustomThemeProvider>
         </ReduxProvider>
       </body>
     </html>

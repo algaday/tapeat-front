@@ -22,8 +22,12 @@ export function RegisterOwnerForm() {
   const [registerOwner] = useRegisterOwnerMutation()
 
   const onSubmit: SubmitHandler<RegisterFormSchema> = async (user) => {
-    await registerOwner(user)
-    router.replace('/dashboard')
+    try {
+      await registerOwner(user).unwrap()
+      router.replace('/login')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
