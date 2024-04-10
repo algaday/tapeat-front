@@ -1,7 +1,12 @@
 'use client'
 
-import { RestaurantBranchForm } from '@/features/restaurant-branch-form/ui/restaurant-branch-form'
+import { RestaurantBranchPage } from '@/pages/restaurant-branch/ui'
+import Link from 'next/link'
 
-export default function Home() {
-  return <RestaurantBranchForm />
+export default function Branches() {
+  return (
+    <>
+      <RestaurantBranchPage />
+    </>
+  )
 }

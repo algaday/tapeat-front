@@ -5,17 +5,18 @@ import { RHFInputField } from '@/shared/ui/rhf-input-field'
 import { CreateBranchSchema, createBranchSchema } from '../model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCreateBranchMutation } from '@/entities/restaurant-branch/api'
+import { useRouter } from 'next/navigation'
 
 export function RestaurantBranchForm() {
   const [createBranch] = useCreateBranchMutation()
-
+  const router = useRouter()
   const methods = useForm<CreateBranchSchema>({
     resolver: zodResolver(createBranchSchema),
   })
 
   const onSubmit: SubmitHandler<CreateBranchSchema> = (address) => {
-    console.log(address)
     createBranch(address)
+    router.push('/dashboard/branches')
   }
   return (
     <FormProvider {...methods}>
