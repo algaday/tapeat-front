@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material'
+import AddBusinessIcon from '@mui/icons-material/AddBusiness'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -19,6 +20,7 @@ import { useAppDispatch, useAppSelector } from '@/shared/lib/store/hooks'
 import { useLogoutMutation } from '@/entities/user/api/user-api'
 import { useRouter } from 'next/navigation'
 import { clearUser } from '@/entities/user/model/slice'
+import Link from 'next/link'
 export function SideNavigation() {
   const user = useAppSelector((state) => state.user.user)
 
@@ -73,22 +75,28 @@ export function SideNavigation() {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <ListItem key='branches' disablePadding>
+            <ListItemButton href='/dashboard/menu' LinkComponent={Link}>
+              <ListItemIcon>
+                <AddBusinessIcon />
+              </ListItemIcon>
+              <ListItemText primary='Меню' />
+            </ListItemButton>
+          </ListItem>
+          <ListItem key='branches' disablePadding>
+            <ListItemButton href='/dashboard/branches' LinkComponent={Link}>
+              <ListItemIcon>
+                <AddBusinessIcon />
+              </ListItemIcon>
+              <ListItemText primary='Филиал' />
+            </ListItemButton>
+          </ListItem>
           <ListItem key='logout' disablePadding>
             <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary='Logout' />
+              <ListItemText primary='Выйти' />
             </ListItemButton>
           </ListItem>
         </List>

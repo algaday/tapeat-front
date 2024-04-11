@@ -1,15 +1,14 @@
-import { Button, Link as MuiLink } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import { StyledLink } from './restaurant-branch.styles'
+import { Wrapper } from './restaurant-branch.styles'
+import { useGetBranchesQuery } from '@/entities/restaurant-branch/api'
+import { RestaurantBranchWidget } from '@/widgets/restaurant-branch'
 
 export function RestaurantBranchPage() {
+  const { data } = useGetBranchesQuery()
+  console.log(data)
+
   return (
-    <main>
-      <Button variant='outlined' startIcon={<AddIcon />}>
-        <StyledLink href='/dashboard/branches/create-branch' passHref>
-          <MuiLink variant='body2'>СОЗДАТЬ ФИЛИАЛ</MuiLink>
-        </StyledLink>
-      </Button>
-    </main>
+    <Wrapper>
+      <RestaurantBranchWidget />
+    </Wrapper>
   )
 }

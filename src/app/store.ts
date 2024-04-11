@@ -13,6 +13,7 @@ import {
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import { baseApi } from '../shared/api'
 import { rtkQueryErrorLogger } from '@/shared/api/error-logger.middleware'
+import restaurantBranchSlice from '@/entities/restaurant-branch/model/slice'
 
 const createNoopStorage = () => {
   return {
@@ -42,6 +43,7 @@ const persistedReducer = persistReducer(persistConfig, userReducer)
 
 const reducers = combineReducers({
   user: persistedReducer,
+  restaurantBranch: restaurantBranchSlice,
   [baseApi.reducerPath]: baseApi.reducer,
 })
 

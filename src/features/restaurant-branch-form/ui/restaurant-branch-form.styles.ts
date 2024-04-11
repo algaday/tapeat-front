@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0px auto;
+  margin: 30px auto;
   width: 100%;
   max-width: 448px;
   background: white;
