@@ -8,7 +8,7 @@ import {
   registerFormSchema,
 } from '../model/register-form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RHFInputField } from '@/shared/ui/rhf-input-field'
+import { RHFInputField } from '@/shared/ui/rhf/rhf-input-field'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 

@@ -75,7 +75,7 @@ export function SideNavigation() {
         </List>
         <Divider />
         <List>
-          <ListItem key='branches' disablePadding>
+          <ListItem key='menu' disablePadding>
             <ListItemButton href='/dashboard/menu' LinkComponent={Link}>
               <ListItemIcon>
                 <AddBusinessIcon />

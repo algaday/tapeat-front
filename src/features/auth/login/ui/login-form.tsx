@@ -6,7 +6,7 @@ import { useLoginMutation } from '@/entities/user/api/user-api'
 import { useRouter } from 'next/navigation'
 import { LoginFormSchema, loginFormShema } from '../model/login-form-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RHFInputField } from '@/shared/ui/rhf-input-field'
+import { RHFInputField } from '@/shared/ui/rhf/rhf-input-field'
 import Link from 'next/link'
 
 export function LoginForm() {
