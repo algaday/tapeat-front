@@ -1,5 +1,9 @@
-import { MenuItemForm } from '@/features/menu/create-menu-item/ui/menu-item-form'
+import { AllMenuItemsPage } from '@/pages/menu/all-menu-items/all-menu-items'
 
 export default function Menu() {
-  return <MenuItemForm />
+  return (
+    <>
+      <AllMenuItemsPage />
+    </>
+  )
 }

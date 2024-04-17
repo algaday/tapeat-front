@@ -28,7 +28,11 @@ export default function InputFileUpload(props: Props) {
       sx={{ margin: '20px 0' }}
     >
       Загрузить изображения
-      <StyledFileInput type='file' onChange={onUploadImage} />
+      <StyledFileInput
+        type='file'
+        onChange={onUploadImage}
+        accept='image/png, image/jpeg'
+      />
     </Button>
   )
 }

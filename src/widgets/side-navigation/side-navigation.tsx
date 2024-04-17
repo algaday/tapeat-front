@@ -32,7 +32,7 @@ export function SideNavigation() {
 
   const handleLogout = async () => {
     dispatch(clearUser())
-    await logout()
+    await logout().unwrap()
     router.replace('/login')
   }
 

@@ -36,7 +36,11 @@ export default function InputFileUpload(props: Props) {
         startIcon={<CloudUploadIcon />}
       >
         Загрузить изображения
-        <StyledFileInput type='file' onChange={onUploadImage} />
+        <StyledFileInput
+          type='file'
+          onChange={onUploadImage}
+          accept='image/png, image/jpeg'
+        />
       </Button>
 
       <StyledTypography variant='subtitle2' warning={!!props.error}>

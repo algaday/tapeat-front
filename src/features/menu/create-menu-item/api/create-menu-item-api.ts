@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api'
+import { MENU_ITEMS_TAG } from '@/shared/api/tags'
 
 export const createMenuItemApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -8,6 +9,7 @@ export const createMenuItemApi = baseApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: [MENU_ITEMS_TAG],
     }),
   }),
 })

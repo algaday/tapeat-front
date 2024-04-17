@@ -1,6 +1,7 @@
 import { USER_TAG, baseApi } from '@/shared/api'
 import { validateResponse } from '@/shared/lib/validate-response'
 import { UserSchema, User, CreateOwnerDto } from './type'
+import { MENU_ITEMS_TAG } from '@/shared/api/tags'
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,7 +10,7 @@ export const userApi = baseApi.injectEndpoints({
         url: 'auth/logout',
         method: 'GET',
       }),
-      invalidatesTags: [USER_TAG],
+      invalidatesTags: [USER_TAG, MENU_ITEMS_TAG],
     }),
     registerOwner: build.mutation<User, CreateOwnerDto>({
       query: (user) => ({

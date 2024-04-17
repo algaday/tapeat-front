@@ -24,7 +24,7 @@ export function MenuItemForm() {
   const onSubmit: SubmitHandler<CreateMenuItemSchema> = async (data) => {
     await createMenuItem({ ...data, modificationGroupIds: [] }).unwrap()
 
-    console.log(data)
+    router.push('/dashboard/menu')
   }
 
   return (

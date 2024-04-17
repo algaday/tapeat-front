@@ -1,2 +1,3 @@
 export const USER_TAG = 'USER_TAG'
 export const RESTAURANT_BRANCH_TAG = 'RESTAURANT_BRANCH_TAG'
+export const MENU_ITEMS_TAG = 'MENU_ITEMS_TAG'
