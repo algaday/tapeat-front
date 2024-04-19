@@ -1,5 +1,6 @@
 import { TextField, TextFieldProps } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
+import get from 'lodash/get'
 
 type Props = TextFieldProps & {
   name: string
@@ -7,17 +8,22 @@ type Props = TextFieldProps & {
 
 export function RHFInputField(props: Props) {
   const { name } = props
+
   const {
     register,
     formState: { errors },
   } = useFormContext()
 
+  const error = get(errors, name)
+
+  const errorText = error?.message as string
+
   return (
     <TextField
       {...props}
       {...register(name)}
-      error={!!errors[name]}
-      helperText={errors[name]?.message as string}
+      error={!!error}
+      helperText={errorText}
     />
   )
 }

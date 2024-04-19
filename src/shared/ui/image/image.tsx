@@ -42,9 +42,14 @@ export function ModifiedImage(props: Props) {
         width={150}
         height={150}
       />
-      <div className='icon'>
-        <Button component='label' className='icon'>
-          <EditIcon />
+      <div className='icon-container'>
+        <Button
+          component='label'
+          variant='contained'
+          tabIndex={-1}
+          startIcon={<EditIcon />}
+        >
+          Заменить
           <StyledInputField
             type='file'
             onChange={onUploadImage}

@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   position: relative;
+
+  .icon-container {
+    position: absolute;
+    top: 70%;
+    right: 15%;
+  }
 `
 
 export const StyledInputField = styled.input`
@@ -17,13 +23,6 @@ export const StyledInputField = styled.input`
   width: 1;
   display: none;
   position: relative;
-
-  .icon {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: red;
-  }
 `
 
 export const StyledIcon = styled(IconButton)`

@@ -6,16 +6,16 @@ import {
   useForm,
 } from 'react-hook-form'
 import {
+  useDeletMenuItemMutation,
   useGetSingleMenuItemQuery,
   useUpdateMenuItemMutation,
 } from './api/single-menu-item-api'
 import { useParams, useRouter } from 'next/navigation'
-import { Button, InputAdornment, Typography } from '@mui/material'
+import { Button, InputAdornment, Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { StyledForm } from './menu-item-overview.styless'
 import { RHFInputField } from '@/shared/ui/rhf/rhf-input-field'
-import { ModifiedImage } from '@/shared/ui/image/image'
-import { Image } from '@/shared/api/image/types'
+
 import { RHFImageUpdate } from '@/shared/ui/rhf/rhf-image-update'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UpdateMenuItemDto, updateMenuItemSchema } from './api/types'
@@ -31,6 +31,8 @@ export function MenuItemOverviewWidget() {
 
   const [updateMenuItems] = useUpdateMenuItemMutation()
 
+  const [deletMenuItem] = useDeletMenuItemMutation()
+
   const router = useRouter()
 
   const methods = useForm<UpdateMenuItemDto>({
@@ -39,17 +41,27 @@ export function MenuItemOverviewWidget() {
 
   useEffect(() => {
     if (!isLoading && !error && menuItem) {
-      methods.setValue('menuItemId', menuItem.id)
-      methods.setValue('name', menuItem.nameOfDish)
-      methods.setValue('category', menuItem.category)
-      methods.setValue('description', menuItem.description)
-      methods.setValue('price', menuItem.price)
-      methods.setValue('imageId', menuItem.image.imageId)
+      methods.setValue('menuItemId', menuItem.id, { shouldValidate: true })
+      methods.setValue('name', menuItem.nameOfDish, { shouldValidate: true })
+      methods.setValue('category', menuItem.category, { shouldValidate: true })
+      methods.setValue('description', menuItem.description, {
+        shouldValidate: true,
+      })
+      methods.setValue('price', menuItem.price, { shouldValidate: true })
+      methods.setValue('imageId', menuItem.image.imageId, {
+        shouldValidate: true,
+      })
     }
   }, [menuItem, error, isLoading, methods])
 
   const onSubmit: SubmitHandler<UpdateMenuItemDto> = async (data) => {
     await updateMenuItems(data).unwrap()
+
+    router.push('/dashboard/menu')
+  }
+
+  const handleDelete = async () => {
+    await deletMenuItem({ menuItemId: menuItem.id }).unwrap()
     router.push('/dashboard/menu')
   }
 
@@ -61,7 +73,7 @@ export function MenuItemOverviewWidget() {
     <FormProvider {...methods}>
       <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
         <Typography variant='h6' component='h2'>
-          update menu item
+          Редактировать
         </Typography>
         <RHFInputField name='name' id='name' label='Название' margin='normal' />
         <RHFInputField
@@ -88,10 +100,19 @@ export function MenuItemOverviewWidget() {
           }}
         />
         <RHFImageUpdate image={menuItem?.image} name='imageId' />
-
-        <Button variant='contained' type='submit'>
-          Создать
-        </Button>
+        <Stack direction='column' spacing={2} marginTop={2}>
+          <Button variant='contained' type='submit'>
+            Изменить
+          </Button>
+          <Button
+            variant='outlined'
+            type='button'
+            color='error'
+            onClick={handleDelete}
+          >
+            Удалить
+          </Button>
+        </Stack>
       </StyledForm>
     </FormProvider>
   )
