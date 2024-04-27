@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  background-color: red;
-  width: 100%;
+  background-color: yellow;
+  width: 240px;
   .avatar-container {
     width: auto;
     display: flex;

@@ -15,9 +15,12 @@ import {
   createModificationGroupSchema,
 } from '../model/type'
 import { useCreateModificationGroupMutation } from '@/entities/modification-group/api/modification-group-api'
+import { useRouter } from 'next/navigation'
 
 export function CreateModificationGroupForm() {
   const [createModificationGroup] = useCreateModificationGroupMutation()
+
+  const router = useRouter()
 
   const methods = useForm<CreateModificationGroupSchema>({
     defaultValues: {
@@ -31,8 +34,11 @@ export function CreateModificationGroupForm() {
     name: 'modifications',
   })
 
-  const onSubmit: SubmitHandler<CreateModificationGroupSchema> = (data) => {
-    createModificationGroup(data)
+  const onSubmit: SubmitHandler<CreateModificationGroupSchema> = async (
+    data
+  ) => {
+    await createModificationGroup(data).unwrap()
+    router.push('/dashboard/menu/modification-group')
   }
 
   const addModification = () => {

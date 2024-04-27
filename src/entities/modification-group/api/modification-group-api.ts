@@ -9,8 +9,26 @@ export const modificationGroupApi = baseApi.injectEndpoints({
       ModificationGroupDto
     >({
       query: (body) => ({
-        url: 'menu/modification',
+        url: 'modification/create',
         method: 'POST',
+        body,
+      }),
+      invalidatesTags: [MODIFICATION_GROUP_TAG],
+    }),
+
+    getAllModificationGroups: build.query<void, void>({
+      query: () => `modification/all`,
+      providesTags: [MODIFICATION_GROUP_TAG],
+    }),
+
+    getModificationGroup: build.query({
+      query: (id) => `modification/${id}`,
+    }),
+
+    deleteModificationGroup: build.mutation({
+      query: (body) => ({
+        url: 'modification/delete',
+        method: 'DELETE',
         body,
       }),
       invalidatesTags: [MODIFICATION_GROUP_TAG],
@@ -18,4 +36,9 @@ export const modificationGroupApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useCreateModificationGroupMutation } = modificationGroupApi
+export const {
+  useCreateModificationGroupMutation,
+  useGetAllModificationGroupsQuery,
+  useGetModificationGroupQuery,
+  useDeleteModificationGroupMutation,
+} = modificationGroupApi

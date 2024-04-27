@@ -1,7 +1,7 @@
 import { useGetBranchesQuery } from '@/entities/restaurant-branch/api'
 import { BranchCard } from '@/entities/restaurant-branch/ui/card/card'
 import AddIcon from '@mui/icons-material/Add'
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import Link from 'next/link'
 
 export function RestaurantBranchWidget() {
@@ -17,7 +17,9 @@ export function RestaurantBranchWidget() {
       >
         СОЗДАТЬ ФИЛИАЛ
       </Button>
-      <BranchCard branches={branches} />
+      <Box marginTop={4}>
+        <BranchCard branches={branches} />
+      </Box>
     </>
   )
 }

@@ -61,7 +61,7 @@ export function MenuItemOverviewWidget() {
   }
 
   const handleDelete = async () => {
-    await deletMenuItem({ menuItemId: menuItem.id }).unwrap()
+    await deletMenuItem({ menuItemId: menuItem.id })
     router.push('/dashboard/menu')
   }
 
@@ -108,7 +108,7 @@ export function MenuItemOverviewWidget() {
             variant='outlined'
             type='button'
             color='error'
-            onClick={handleDelete}
+            onClick={() => handleDelete()}
           >
             Удалить
           </Button>

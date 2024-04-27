@@ -1,5 +1,6 @@
-import { CreateModificationGroupForm } from '@/features/menu/create-modification-group/ui/create-modification-group-form'
+import { ModificationGroupListWidget } from '@/widgets/modification-group/display-list/ui/display-list'
+import { Container } from '@mui/material'
 
 export default function ModificationGroup() {
-  return <CreateModificationGroupForm />
+  return <ModificationGroupListWidget />
 }
