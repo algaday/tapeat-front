@@ -2,7 +2,7 @@ import { Box } from '@mui/system'
 import styled from 'styled-components'
 
 export const StyledModalBox = styled(Box)({
-  width: '500px',
+  minWidth: '500px',
   backgroundColor: 'white',
   position: 'absolute',
   top: '10%',

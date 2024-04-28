@@ -28,15 +28,19 @@ export function ModificationGroupOverview(
     setModal(false)
   }
 
+  if (!modifications) {
+    return <h1>No such element</h1>
+  }
   return (
     <>
       <Typography variant='h4'>Модификация: {name}</Typography>
       <Stack direction='row' marginTop={1} spacing={2}>
         <Button
-          color='success'
+          color='info'
           startIcon={<DriveFileRenameOutlineTwoToneIcon />}
+          onClick={() => props.onModalOpen()}
         >
-          Редактировать
+          Добавить модификацию
         </Button>
         <Button
           color='error'
@@ -52,7 +56,7 @@ export function ModificationGroupOverview(
       ))}
       {modal && (
         <Modal
-          text='Вы точно хотите удалить модификацию?'
+          text='Вы точно хотите удалить группу?'
           onDelete={handleDelete}
           onCancel={handleCancel}
         />

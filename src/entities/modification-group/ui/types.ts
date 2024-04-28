@@ -5,6 +5,7 @@ export type ModificationGroupOverviewProps = {
   createdAt: string
   updatedAt: string
   modifications: Modification[]
+  onModalOpen: () => void
 }
 
 export type Modification = {

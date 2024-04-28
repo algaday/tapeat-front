@@ -1,5 +1,5 @@
-import { GetModificationGroupWidget } from '@/features/menu/get-modification-group/ui/get-modification-group'
+import { ModificationGroupDetailsWidget } from '@/widgets/modification-group/details/modification-group-details'
 
 export function ModificationGroupPage() {
-  return <GetModificationGroupWidget />
+  return <ModificationGroupDetailsWidget />
 }

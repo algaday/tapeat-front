@@ -1,6 +1,13 @@
 import { baseApi } from '@/shared/api'
 import { MODIFICATION_GROUP_TAG } from '@/shared/api/tags'
-import { ModificationGroupDto, ModificationGroupResponse } from './types'
+import {
+  AddModificationDto,
+  DeleteModificationGroupDto,
+  ModificationGroup,
+  ModificationGroupDto,
+  ModificationGroupResponse,
+} from './types'
+import { Modification } from '../ui/types'
 
 export const modificationGroupApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -16,19 +23,44 @@ export const modificationGroupApi = baseApi.injectEndpoints({
       invalidatesTags: [MODIFICATION_GROUP_TAG],
     }),
 
-    getAllModificationGroups: build.query<void, void>({
+    getAllModificationGroups: build.query<ModificationGroup[], void>({
       query: () => `modification/all`,
       providesTags: [MODIFICATION_GROUP_TAG],
     }),
 
-    getModificationGroup: build.query({
+    getModificationGroup: build.query<ModificationGroup, string>({
       query: (id) => `modification/${id}`,
+      providesTags: [MODIFICATION_GROUP_TAG],
     }),
 
-    deleteModificationGroup: build.mutation({
+    deleteModificationGroup: build.mutation<
+      ModificationGroupResponse,
+      DeleteModificationGroupDto
+    >({
       query: (body) => ({
         url: 'modification/delete',
         method: 'DELETE',
+        body,
+      }),
+      invalidatesTags: [MODIFICATION_GROUP_TAG],
+    }),
+
+    deleteModification: build.mutation<
+      Modification,
+      DeleteModificationGroupDto
+    >({
+      query: (body) => ({
+        url: 'modification/delete-modification',
+        method: 'DELETE',
+        body,
+      }),
+      invalidatesTags: [MODIFICATION_GROUP_TAG],
+    }),
+
+    addModification: build.mutation<Modification, AddModificationDto>({
+      query: (body) => ({
+        url: 'modification/add',
+        method: 'POST',
         body,
       }),
       invalidatesTags: [MODIFICATION_GROUP_TAG],
@@ -41,4 +73,6 @@ export const {
   useGetAllModificationGroupsQuery,
   useGetModificationGroupQuery,
   useDeleteModificationGroupMutation,
+  useAddModificationMutation,
+  useDeleteModificationMutation,
 } = modificationGroupApi

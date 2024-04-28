@@ -21,7 +21,7 @@ export const singleMenuItemApi = baseApi.injectEndpoints({
       invalidatesTags: [MENU_ITEMS_TAG],
     }),
 
-    deletMenuItem: build.mutation({
+    deleteMenuItem: build.mutation({
       query: (body) => ({
         url: 'menu/delete-menu-item',
         method: 'DELETE',
@@ -35,5 +35,5 @@ export const singleMenuItemApi = baseApi.injectEndpoints({
 export const {
   useGetSingleMenuItemQuery,
   useUpdateMenuItemMutation,
-  useDeletMenuItemMutation,
+  useDeleteMenuItemMutation,
 } = singleMenuItemApi

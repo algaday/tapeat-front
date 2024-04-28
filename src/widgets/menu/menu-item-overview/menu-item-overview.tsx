@@ -6,7 +6,7 @@ import {
   useForm,
 } from 'react-hook-form'
 import {
-  useDeletMenuItemMutation,
+  useDeleteMenuItemMutation,
   useGetSingleMenuItemQuery,
   useUpdateMenuItemMutation,
 } from './api/single-menu-item-api'
@@ -31,7 +31,7 @@ export function MenuItemOverviewWidget() {
 
   const [updateMenuItems] = useUpdateMenuItemMutation()
 
-  const [deletMenuItem] = useDeletMenuItemMutation()
+  const [deleteMenuItem] = useDeleteMenuItemMutation()
 
   const router = useRouter()
 
@@ -61,7 +61,7 @@ export function MenuItemOverviewWidget() {
   }
 
   const handleDelete = async () => {
-    await deletMenuItem({ menuItemId: menuItem.id })
+    await deleteMenuItem({ menuItemId: menuItem.id })
     router.push('/dashboard/menu')
   }
 
