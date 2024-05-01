@@ -7,6 +7,7 @@ export const updateMenuItemSchema = z.object({
   description: z.string().min(1, { message: 'Заполните описание' }),
   price: z.string().min(1, { message: 'Укажите цену' }),
   imageId: z.string().min(1, { message: 'Загрузите фотографию' }),
+  modificationGroupIds: z.array(z.any()),
 })
 
 export const ResponseMenuItemSchema = z.object({
@@ -25,6 +26,18 @@ export const ResponseMenuItemSchema = z.object({
     mediumThumbnailPath: z.string(),
     smallThumbnailPath: z.string(),
   }),
+  modificationGroups: z
+    .array(
+      z.object({
+        id: z.string(),
+        menuItemId: z.string(),
+        modificationId: z.string(),
+        createdAt: z.string(),
+        updatedAt: z.string(),
+        modificationGroup: z.object({ name: z.string() }),
+      })
+    )
+    .optional(),
 })
 
 export type ResponseMenuItem = z.infer<typeof ResponseMenuItemSchema>

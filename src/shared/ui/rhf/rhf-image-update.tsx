@@ -1,11 +1,10 @@
 import { useFormContext } from 'react-hook-form'
-import InputFileUpload from '../image-upload/image-upload'
 import { Image } from '@/shared/api/image/types'
-import { ModifiedImage } from '../image/image'
+import { ImageParams, ModifiedImage } from '../image/image'
 
 type Props = {
   name: string
-  image: Image
+  image?: ImageParams
 }
 
 export function RHFImageUpdate(props: Props) {
@@ -18,5 +17,5 @@ export function RHFImageUpdate(props: Props) {
     setValue(props.name, image.id, { shouldValidate: true })
   }
 
-  return <ModifiedImage image={props.image} onChange={onImageUploadChange} />
+  return <ModifiedImage image={props?.image!} onChange={onImageUploadChange} />
 }

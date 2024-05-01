@@ -1,10 +1,5 @@
 'use client'
-import {
-  FieldValues,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import {
   useDeleteMenuItemMutation,
   useGetSingleMenuItemQuery,
@@ -19,6 +14,8 @@ import { RHFInputField } from '@/shared/ui/rhf/rhf-input-field'
 import { RHFImageUpdate } from '@/shared/ui/rhf/rhf-image-update'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UpdateMenuItemDto, updateMenuItemSchema } from './api/types'
+import { RHFSelect } from '@/shared/ui/rhf/rhf-select'
+import { useGetAllModificationGroupsQuery } from '@/entities/modification-group/api/modification-group-api'
 
 export function MenuItemOverviewWidget() {
   const params = useParams<{ menuItemId: string }>()
@@ -27,7 +24,10 @@ export function MenuItemOverviewWidget() {
     data: menuItem,
     isLoading,
     error,
-  } = useGetSingleMenuItemQuery(params?.menuItemId)
+  } = useGetSingleMenuItemQuery(params?.menuItemId!)
+
+  const { data: allModificationGroups } = useGetAllModificationGroupsQuery()
+  console.log(allModificationGroups)
 
   const [updateMenuItems] = useUpdateMenuItemMutation()
 
@@ -35,8 +35,15 @@ export function MenuItemOverviewWidget() {
 
   const router = useRouter()
 
+  const modificationGroupsArray = menuItem?.modificationGroups?.map(
+    (menuItem) => menuItem.modificationId
+  )
+
   const methods = useForm<UpdateMenuItemDto>({
     resolver: zodResolver(updateMenuItemSchema),
+    defaultValues: {
+      modificationGroupIds: [],
+    },
   })
 
   useEffect(() => {
@@ -51,17 +58,21 @@ export function MenuItemOverviewWidget() {
       methods.setValue('imageId', menuItem.image.imageId, {
         shouldValidate: true,
       })
+      methods.setValue('modificationGroupIds', modificationGroupsArray!, {
+        shouldValidate: true,
+      })
     }
   }, [menuItem, error, isLoading, methods])
 
   const onSubmit: SubmitHandler<UpdateMenuItemDto> = async (data) => {
+    console.log(data)
     await updateMenuItems(data).unwrap()
 
     router.push('/dashboard/menu')
   }
 
   const handleDelete = async () => {
-    await deleteMenuItem({ menuItemId: menuItem.id })
+    await deleteMenuItem({ menuItemId: menuItem?.id })
     router.push('/dashboard/menu')
   }
 
@@ -98,6 +109,11 @@ export function MenuItemOverviewWidget() {
             inputProps: { min: 0, max: 100000 },
             endAdornment: <InputAdornment position='start'>тг</InputAdornment>,
           }}
+        />
+
+        <RHFSelect
+          name='modificationGroupIds'
+          modificationGroups={allModificationGroups}
         />
         <RHFImageUpdate image={menuItem?.image} name='imageId' />
         <Stack direction='column' spacing={2} marginTop={2}>

@@ -6,6 +6,7 @@ export const createMenuItemSchema = z.object({
   description: z.string().min(1, { message: 'Заполните описание' }),
   imageId: z.string().min(1, { message: 'Загрузите изображение' }),
   price: z.string().min(1, { message: 'Укажите цену' }),
+  modificationGroupIds: z.array(z.string()),
 })
 
 export type CreateMenuItemSchema = z.infer<typeof createMenuItemSchema>

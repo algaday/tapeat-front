@@ -8,7 +8,6 @@ type Props = TextFieldProps & {
 
 export function RHFInputField(props: Props) {
   const { name } = props
-
   const {
     register,
     formState: { errors },

@@ -1,4 +1,10 @@
-import { Button, CardActions, CardContent, Typography } from '@mui/material'
+import {
+  Button,
+  CardActions,
+  CardContent,
+  Stack,
+  Typography,
+} from '@mui/material'
 import { StyledCard } from './menu-item-card.styles'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -39,20 +45,23 @@ export function MenuItemCard(props: Props) {
           className='image'
         />
       </div>
-      <CardContent className='card-content'>
-        <Typography variant='h6'>Названия: {nameOfDish}</Typography>
-        <Typography variant='caption'>Категория: {category}</Typography>
-        <Typography variant='body1' noWrap>
-          Описание: {description}
-        </Typography>
-        <Typography variant='overline'>Цена: {price} тенге</Typography>
-        <Button
-          variant='outlined'
-          href={`/dashboard/menu/${id}`}
-          LinkComponent={Link}
-        >
-          Подробнее
-        </Button>
+      <CardContent className='card-content' sx={{ width: '100%' }}>
+        <Stack>
+          <Typography variant='h6'>Названия: {nameOfDish}</Typography>
+          <Typography variant='caption'>Категория: {category}</Typography>
+          <Typography variant='body1' noWrap>
+            Описание: {description}
+          </Typography>
+          <Typography variant='overline'>Цена: {price} тенге</Typography>
+          <Button
+            variant='outlined'
+            href={`/dashboard/menu/${id}`}
+            LinkComponent={Link}
+            fullWidth
+          >
+            Подробнее
+          </Button>
+        </Stack>
       </CardContent>
     </StyledCard>
   )

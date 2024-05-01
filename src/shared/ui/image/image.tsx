@@ -6,7 +6,7 @@ import { useCreateImageMutation } from '@/shared/api/image/image-api'
 import { Image as ImageType } from '@/shared/api/image/types'
 import { useState } from 'react'
 
-type ImageParams = {
+export type ImageParams = {
   mediumThumbnailPath: string
   originalPath: string
   smallThumbnailPath: string
